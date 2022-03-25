@@ -19,12 +19,17 @@ namespace TarodevController {
         [SerializeField, Range(1f, 3f)] private float _maxIdleSpeed = 2;
         [SerializeField] private float _maxParticleFallSpeed = -40;
 
+        [SerializeField] private float rotDiff = 0;
         private IPlayerController _player;
         private bool _playerGrounded;
         private ParticleSystem.MinMaxGradient _currentGradient;
         private Vector2 _movement;
 
-        void Awake() => _player = GetComponentInParent<IPlayerController>();
+        void Awake() 
+        {
+            _player = GetComponentInParent<IPlayerController>();
+            rotDiff = transform.parent.rotation.eulerAngles.z;
+        }
 
         void Update() {
             if (_player == null) return;
@@ -33,10 +38,10 @@ namespace TarodevController {
             if (_player.Input.X != 0) transform.localScale = new Vector3(_player.Input.X > 0 ? 1 : -1, 1, 1);
 
             // Lean while running
-            var targetRotVector = new Vector3(0, 0, Mathf.Lerp(-_maxTilt, _maxTilt, Mathf.InverseLerp(-1, 1, _player.Input.X)));
+            var targetRotVector = new Vector3(0, 0, Mathf.Lerp(-_maxTilt, _maxTilt, Mathf.InverseLerp(-1, 1, _player.Input.X)) - rotDiff);
             _anim.transform.rotation = Quaternion.RotateTowards(_anim.transform.rotation, Quaternion.Euler(targetRotVector), _tiltSpeed * Time.deltaTime);
 
-            // Speed up idle while running
+            // Speed up idle while runnin
             _anim.SetFloat(IdleSpeedKey, Mathf.Lerp(1, _maxIdleSpeed, Mathf.Abs(_player.Input.X)));
 
             // Splat

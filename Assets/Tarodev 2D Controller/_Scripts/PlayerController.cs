@@ -22,6 +22,9 @@ namespace TarodevController {
         private Vector3 _lastPosition;
         private float _currentHorizontalSpeed, _currentVerticalSpeed;
 
+        [SerializeField] private bool isUp = true;
+        private RayRange isDown;
+
         // This is horrible, but for some reason colliders are not fully established when update starts...
         private bool _active;
         void Awake() => Invoke(nameof(Activate), 0.5f);
@@ -42,6 +45,19 @@ namespace TarodevController {
             CalculateJump(); // Possibly overrides vertical
 
             MoveCharacter(); // Actually perform the axis movement
+            if (Grounded)
+            {
+                Debug.Log(this + "is grounded");
+            }
+
+            if (!isUp)
+            {
+                isDown = _raysUp;
+            }
+            else
+            {
+                isDown = _raysDown;
+            }
         }
 
 
@@ -80,7 +96,7 @@ namespace TarodevController {
 
             // Ground
             LandingThisFrame = false;
-            var groundedCheck = RunDetection(_raysDown);
+            var groundedCheck = RunDetection(isDown);
             if (_colDown && !groundedCheck) _timeLeftGrounded = Time.time; // Only trigger when first leaving
             else if (!_colDown && groundedCheck) {
                 _coyoteUsable = true; // Only trigger when first touching
