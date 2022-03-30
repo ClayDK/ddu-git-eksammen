@@ -83,7 +83,7 @@ namespace TarodevController {
                 SetColor(_moveParticles);
             }
 
-            _movement = _player.RawMovement; // Previous frame movement is more valuable
+            _movement = _player. RawMovement; // Previous frame movement is more valuable
         }
 
         private void OnDisable() {
