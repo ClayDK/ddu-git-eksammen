@@ -62,12 +62,13 @@ namespace TarodevController {
 
 
         #region Gather Input
-
+        public string jumpName = "Jump1";
+        public string controlAxisName = "Horizontal1";
         private void GatherInput() {
             Input = new FrameInput {
-                JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
-                JumpUp = UnityEngine.Input.GetButtonUp("Jump"),
-                X = UnityEngine.Input.GetAxisRaw("Horizontal")
+                JumpDown = UnityEngine.Input.GetButtonDown(jumpName),
+                JumpUp = UnityEngine.Input.GetButtonUp(jumpName),
+                X = UnityEngine.Input.GetAxisRaw(controlAxisName)
             };
             if (Input.JumpDown) {
                 _lastJumpPressed = Time.time;
