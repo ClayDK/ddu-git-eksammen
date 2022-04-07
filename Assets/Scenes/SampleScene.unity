@@ -14319,6 +14319,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerobj: {fileID: 398205556}
+  interacting: 0
+  direction: {x: 0, y: 0}
+  interactName: 
+  rayCastDistance: 6
+  affectLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -14688,7 +14695,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: -1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -14826,6 +14833,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerobj: {fileID: 1769076311}
+  interacting: 0
+  direction: {x: 0, y: 0}
+  interactName: 
+  rayCastDistance: 6
+  affectLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1954036189
 GameObject:
   m_ObjectHideFlags: 0
@@ -14899,7 +14913,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: -1
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

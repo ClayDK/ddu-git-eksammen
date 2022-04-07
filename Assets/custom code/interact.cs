@@ -5,6 +5,11 @@ using UnityEngine;
 public class interact : MonoBehaviour
 {
     public GameObject playerobj;
+    public bool interacting = false;
+    public Vector2 direction;
+    public string interactName = "fire1";
+    public float rayCastDistance = 6f;
+    public LayerMask affectLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,16 +19,15 @@ public class interact : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (playerobj = null)
+        if (Input.GetButtonDown(interactName))
         {
-            //playerobj = GameObject.FindGameObjectWithTag("Player");
-        }
+            RaycastHit2D hit = Physics2D.Raycast(this.playerobj.transform.position, direction, rayCastDistance, affectLayer);
+            if (hit)
+            {
+                hit.rigidbody.gravityScale *= -1;
 
-        //RaycastHit2D hit = Physics2D.Raycast(playerobj, Vector2.zero);
-
-        //if (hit.collider != null)
-        {
-            //Debug.Log("Target name: " + hit.collider.name);
+//                interacting = true;
+            }
         }
     }
 }
