@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class antigrav : MonoBehaviour
 {
-    public interact interacting;
+    //public interact interacting;
     
-    public void ActivateGravity(bool activate) 
-    {
-        GetComponent<Rigidbody2D>().gravityScale *= -1;
-    }
+    //public void ActivateGravity(bool activate) 
+    //{
+    //    GetComponent<Rigidbody2D>().gravityScale *= -1;
+    //}
 }

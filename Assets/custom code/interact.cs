@@ -1,32 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class interact : MonoBehaviour
+namespace TarodevController
 {
-    public GameObject playerobj;
-    public bool interacting = false;
-    public Vector2 direction;
-    public string interactName = "fire1";
-    public float rayCastDistance = 6f;
-    public LayerMask affectLayer;
-    // Start is called before the first frame update
-    void Start()
+    public class interact : MonoBehaviour
     {
-    
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButtonDown(interactName))
+        public GameObject playerobj;
+        public bool interacting = false;
+        public Vector2 direction = Vector2.right;
+        public string interactName = "Fire1";
+        public float rayCastDistance = 6f;
+        public LayerMask affectLayer;
+        private IPlayerController _player;
+        public bool facingRight = true;
+        // Start is called before the first frame update
+        void Awake()
         {
-            RaycastHit2D hit = Physics2D.Raycast(this.playerobj.transform.position, direction, rayCastDistance, affectLayer);
-            if (hit)
-            {
-                hit.rigidbody.gravityScale *= -1;
+            _player = GetComponentInParent<IPlayerController>();
+        }
 
-//                interacting = true;
+        // Update is called once per frame
+        void Update()
+        {
+            Debug.Log(gameObject.name + ": " + transform.localScale.x);
+            Debug.DrawRay(transform.position, direction * transform.localScale.x, Color.blue);
+            if (Input.GetButtonDown(interactName))
+            {
+                Debug.Log(gameObject.name + " Interacting");
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction * transform.localScale.x, rayCastDistance, affectLayer);
+
+                if (hit)
+                {
+                    Debug.Log(hit.collider.name + " was hit");
+                    hit.rigidbody.gravityScale *= -1;
+                    //              interacting = true;
+                }
+                //if (_player.Input.X > 0 && !facingRight)
+                //{
+
+                //}
             }
         }
     }

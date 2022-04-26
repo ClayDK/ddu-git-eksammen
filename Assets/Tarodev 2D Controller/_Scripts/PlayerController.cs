@@ -47,7 +47,7 @@ namespace TarodevController {
             MoveCharacter(); // Actually perform the axis movement
             if (Grounded)
             {
-                Debug.Log(this + "is grounded");
+                //Debug.Log(this + "is grounded");
             }
 
             if (!isUp)
