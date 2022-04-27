@@ -29,9 +29,12 @@ namespace TarodevController {
         private bool _active;
         void Awake() => Invoke(nameof(Activate), 0.5f);
         void Activate() =>  _active = true;
+
+
         
         private void Update() {
             if(!_active) return;
+            respawnplayer();
             // Calculate velocity
             Velocity = (transform.position - _lastPosition) / Time.deltaTime;
             _lastPosition = transform.position;
@@ -159,7 +162,6 @@ namespace TarodevController {
         }
 
         #endregion
-
 
         #region Walk
 
@@ -314,5 +316,45 @@ namespace TarodevController {
         }
 
         #endregion
+
+        private void Start()
+        {
+            restartPos = restartPosRef.position;
+        }
+
+        #region checkpoint
+        public Vector3 checkpointPos;
+        public string checkpointName = "checkpoint1";
+        public Transform restartPosRef; 
+        public Vector3 restartPos;
+        public string restartName = "restart1";
+        // Update is called once per frame
+        public void respawnplayer ()
+        {
+
+            if (UnityEngine.Input.GetButtonDown(restartName))
+            {
+                transform.position = restartPos;
+            }
+
+            if (UnityEngine.Input.GetButtonDown(checkpointName))
+            {
+                transform.position = checkpointPos;
+            }
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("checkpoint"))
+            {
+                checkpointPos = collision.transform.position;
+            }
+            
+            if (collision.CompareTag("restart"))
+            {
+                restartPos = collision.transform.position;
+            }
+        }
+        #endregion
+
     }
 }
