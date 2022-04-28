@@ -22,16 +22,16 @@ namespace TarodevController
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(gameObject.name + ": " + transform.localScale.x);
-            Debug.DrawRay(transform.position, direction * transform.localScale.x, Color.blue);
+            //Debug.Log(gameObject.name + ": " + transform.localScale.x);
+            //Debug.DrawRay(transform.position, direction * transform.localScale.x, Color.blue);
             if (Input.GetButtonDown(interactName))
             {
-                Debug.Log(gameObject.name + " Interacting");
+                //Debug.Log(gameObject.name + " Interacting");
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction * transform.localScale.x, rayCastDistance, affectLayer);
 
                 if (hit)
                 {
-                    Debug.Log(hit.collider.name + " was hit");
+                    //Debug.Log(hit.collider.name + " was hit");
                     hit.rigidbody.gravityScale *= -1;
                     //              interacting = true;
                 }

@@ -35,6 +35,9 @@ namespace TarodevController {
         private void Update() {
             if(!_active) return;
             respawnplayer();
+
+            //Debug.Log(gameObject.name + " " + UnityEngine.Input.anyKey);
+            
             // Calculate velocity
             Velocity = (transform.position - _lastPosition) / Time.deltaTime;
             _lastPosition = transform.position;
